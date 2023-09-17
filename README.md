@@ -33,3 +33,7 @@ Create an S3 bucket for data ingestion.
 
 
 Configure a lambda function, use runtime as python and add the python code on the configuration tab and deploy.
+
+
+Create AWS Glue and crawler for the file
+
