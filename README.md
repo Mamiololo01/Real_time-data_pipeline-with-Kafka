@@ -35,7 +35,9 @@ Create an S3 bucket for data ingestion.
 Configure a lambda function, use runtime as python and add the python code on the configuration tab and deploy.
 
 
-Create AWS Glue and crawler for the file on the s3 bucket and run the query on AWS Athena
+Create AWS Glue and crawler for the file on the s3 bucket and run the query on AWS Athena. Create crawler and add data source as s3, choose the s3 bucket as the file path.. Please ensure there is IAM role for AWS crawler to have access to S3  bucket. Finally create a database for the datawarehoue for the analysis will happen with the Athena.
+
+Create another S3 bucket for Athena temporary queries and must be in the same region as the s3 bucket for the ingestion.
 
 
 <img width="1252" alt="Screenshot 2023-08-13 at 22 25 55" src="https://github.com/Mamiololo01/Real_time-data_pipeline-with-Kafka/assets/67044030/ed5f8c42-d619-49fd-a7cd-af766098e6c2">
