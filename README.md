@@ -7,6 +7,8 @@ In this project, you will execute an End-To-End Data Engineering Project on Real
 We are going to use different technologies such as Python, Amazon Web Services (AWS), Apache Kafka, Glue, Athena, and SQL.
 
 ## Design
+
+![Architecture](https://github.com/Mamiololo01/Real_time-data_pipeline-with-Kafka/assets/67044030/4f00a623-8343-47c0-a8e9-708f6d11b220)
 ￼
 
 ## Technology Used
