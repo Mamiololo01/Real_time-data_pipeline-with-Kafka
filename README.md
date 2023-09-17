@@ -44,3 +44,5 @@ Create AWS Glue and crawler for the file and run the query on AWS Athena
 
 <img width="1253" alt="Screenshot 2023-08-13 at 22 38 19" src="https://github.com/Mamiololo01/Real_time-data_pipeline-with-Kafka/assets/67044030/f3c67fbb-81d3-43f0-906b-dd8fd2e9fbec">
 
+<img width="1256" alt="Screenshot 2023-08-13 at 22 38 25" src="https://github.com/Mamiololo01/Real_time-data_pipeline-with-Kafka/assets/67044030/ef56f1c4-4725-421a-9b70-15915a96ec6b">
+
