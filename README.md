@@ -27,4 +27,7 @@ Install Apache Kafka on EC2 by installing an EC2 instance and install Zookeeper,
 <img width="943" alt="Screenshot 2023-09-17 at 21 24 48" src="https://github.com/Mamiololo01/Real_time-data_pipeline-with-Kafka/assets/67044030/bc437fc4-2468-442a-9f91-e37d674601fb">
 
 
+Create an S3 bucket for data ingestion.
+
+
 Configure a lambda function, use runtime as python and add the python code on the configuration tab and deploy.
