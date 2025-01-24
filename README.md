@@ -23,7 +23,7 @@ Apache Kafka including installing Java runtime.
 
 ## Basic and core concepts of Kafka.
 
-Distributed Kafka works as a cluster of one or more nodes that can live in different Datacenters, we can distribute data/ load across different nodes in the Kafka Cluster, and it is inherently scalable, available, and fault-tolerant.
+DistributedKafka works as a cluster of one or more nodes that can live in different Datacenters, we can distribute data/ load across different nodes in the Kafka Cluster, and it is inherently scalable, available, and fault-tolerant.
 
 Streaming Platform
 Kafka stores data as a stream of continuous records which can be processed in different methods.
@@ -38,7 +38,7 @@ It certainly can act as a message queue, but it’s not limited to that. It can 
 
 Having said all of that, Kafka is commonly used for real-time streaming data pipelines, i.e. to transfer data between systems, building systems that transform continuously flowing data, and building event-driven systems.
 
-Message
+### Message
 
 A message is the atomic unit of data for Kafka. Let’s say that you are building a log monitoring system, and you push each log record into Kafka, your log message is a JSON that has this structure.
 
@@ -46,15 +46,15 @@ When you push this JSON into Kafka you are actually pushing 1 message. Kafka sav
 
 Messages might have an associated “Key” which is nothing but some metadata, which is used to determine the destination partition (will know soon as well) for a message.
 
-Topic
+### Topic
 
 Topics, as the name suggests, are the logical categories of messages in Kafka, a stream of the same type of data. Going back to our previous example of the logging system, let’s say our system generates application logs, ingress logs, and database logs and pushes them to Kafka for other services to consume. Now, these three types of logs can be logically be divided into three topics, appLogs, ingressLogs, and dbLogs. We can create these three topics in Kafka, whenever there’s an app log message, we push it to appLogs topic and for database logs, we push it to the dbLogs topic. This way we have logical segregation between messages, sort of like having different tables for holding different types of data.
 
-Partitions
+### Partitions
 
 Partition is analogous to shard in the database and is the core concept behind Kafka’s scaling capabilities. Let’s say that our system becomes really popular and hence there are millions of log messages per second. So now the node on which appLogs topic is present, is unable to hold all the data that is coming in. We initially solve this by adding more storage to our node i.e. vertical scaling. But as we all know vertical scaling has its limit, once that threshold is reached we need to horizontally scale, which means we need to add more nodes and split the data between the nodes. When we split data of a topic into multiple streams, we call all of those smaller streams the “Partition” of that topic.
 
-Producer
+### Producer
 
 A producer is the Kafka client that publishes messages to a Kafka topic. Also one of the core responsibilities of the Producer is to decide which partition to send the messages to. Depending on various configuration and parameters, the producer decides the destination partition, let’s look a bit more into this.
 * 		No Key specified => When no key is specified in the message the producer will randomly decide partition and would try to balance the total number of messages on all partitions.
@@ -66,7 +66,7 @@ Consumer
 
 So far we have produced messages, to read those messages we use Kafka consumer. A consumer reads messages from partitions, in an ordered fashion. So if 1, 2, 3, 4 was inserted into a topic, the consumer will read it in the same order. Since every message has an offset, every time a consumer reads a message it stores the offset value onto Kafka or Zookeeper, denoting that it is the last message that the consumer read. So in case, a consumer node goes down, it can come back and resume from the last read position. Also if at any point in time a consumer needs to go back in time and read older messages, it can do so by just resetting the offset position.
 
-Consumer Group
+### Consumer Group
 
 A consumer group is a collection of consumers that work together to read messages from a topic. There are some very interesting concepts here, let’s go through them.
 * 		Fan out exchange => A single topic can be subscribed to by multiple consumer groups. Let’s say that you are building an OTP service.
@@ -75,23 +75,23 @@ Now you need to send both text and email OTP. So your OTP service can put the OT
 
 Order guarantee => Now we have seen that a topic can be partitioned and multiple consumers can consumer from the same topic, then how do you maintain the order of messages on the consumer-end one might ask. Good question. One partition can not be read by multiple consumers in the same consumer group. This is enabled by the consumer group only, only one consumer in the group gets to read from a single partition. 
 
-Broker
+### Broker
 
 A broker is a single Kafka server. Brokers receive messages from producers, assigns offset to them, and then commit them to the partition log, which is basically writing data to disk, and this gives Kafka its durable nature.
 
-Cluster
+### Cluster
 
 A Kafka cluster is a group of broker nodes working together to provide, scalability, availability, and fault tolerance. One of the brokers in a cluster works as the Controller, which basically assigns partitions to brokers, monitors for broker failure to do certain administrative stuff.
 In a cluster, partitions are replicated on multiple brokers depending on the replication factor of the topic to have failover capability. What I mean is, for a topic of replication factor 3, each partition of that topic will live onto 3 different brokers. When a partition is replicated onto 3 brokers, one of the brokers will act as the leader for that partition and the rest two will be followers. Data is always written on the leader broker and then replicated to the followers. This way we do not lose data nor availability of the cluster, and if the leader goes down another leader is elected
 
-Zookeeper
+### Zookeeper
 
 Kafka does not function without zookeeper( at least for now, they have plans to deprecate zookeeper in near future). Zookeeper works as the central configuration and consensus management system for Kafka. It tracks the brokers, topics, and partition assignment, leader election, basically all the metadata about the cluster.
 
 And these my friend were the basic and core concepts of Kafka.
 
 
-## Procedures
+### Procedures
 Install Apache Kafka on EC2 by installing an EC2 instance and install Zookeeper, KafkaConsumer and KafkaProducer on the ec2 instance on AWS. Kindly ensure the instance-type has enough resources for the Apache Kafka. You will need to open 3 differenet VM tabs for the dependencies.
 
 <img width="943" alt="Screenshot 2023-09-17 at 21 24 48" src="https://github.com/Mamiololo01/Real_time-data_pipeline-with-Kafka/assets/67044030/bc437fc4-2468-442a-9f91-e37d674601fb">
